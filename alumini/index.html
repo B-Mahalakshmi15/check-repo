@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alumni Vibes</title>
+  <link rel="stylesheet" href="alumini.css" />
+</head>
+<body>
+  <!-- Launch Screen -->
+  <div id="launch" class="screen active launch-screen">
+    <div class="centered fade-in">
+      <img src="aluminilogo.png" class="logo pulse" alt="Logo" />
+      <h1 class="vibes-title">ALUMNI VIBES</h1>
+      <button class="start-btn glow-btn" onclick="navigateTo('signup')">Get Started</button>
+    </div>
+  </div>
+
+  <!-- Sign Up Screen -->
+  <div id="signup" class="screen">
+    <img src="aluminilogo.png" class="logo" alt="Logo" />
+    <h2>LET’S CONNECT</h2>
+    <input id="signup-name" type="text" placeholder="Enter your name" />
+    <input id="signup-email" type="email" placeholder="Enter your email" />
+    <input id="signup-phone" type="text" placeholder="Enter your phone number" />
+    <input id="signup-password" type="password" placeholder="Enter password" />
+    <select id="signup-branch">
+      <option value="">Select your Branch</option>
+      <option value="CSE">CSE</option>
+      <option value="EEE">EEE</option>
+      <option value="ECE">ECE</option>
+      <option value="CIVIL">CIVIL</option>
+      <option value="MECH">MECH</option>
+      <option value="BME">BME</option>
+    </select>
+    <input id="signup-batch" type="text" placeholder="Enter Batch" />
+    <button onclick="signUp()">Sign Up</button>
+    <div class="divider">or sign up with Google</div>
+    <button class="google-btn">Google</button>
+    <p>Already have an account? <a href="#" onclick="navigateTo('signin')">Sign in now</a></p>
+  </div>
+
+  <!-- Sign In Screen -->
+  <div id="signin" class="screen">
+    <img src="aluminilogo.png" class="logo" alt="Logo" />
+    <h2>GREAT TO BE TOGETHER AGAIN!</h2>
+    <input id="signin-email" type="text" placeholder="Email or phone number" />
+    <input id="signin-password" type="password" placeholder="Enter password" />
+    <label><input type="checkbox" /> Remember me</label>
+    <button onclick="signIn()">Sign In</button>
+    <div class="divider">or sign in with Google</div>
+    <button class="google-btn">Google</button>
+    <p>Don’t have an account? <a href="#" onclick="navigateTo('signup')">Sign up now</a></p>
+  </div>
+
+  <!-- Home Screen -->
+  <div id="home" class="screen home">
+    <h3 id="user-name">Hello Raman</h3>
+    <p class="subtitle">Stay connected with your alma mater!</p>
+
+    <section class="spotlight-section">
+      <h4>Alumni Spotlights</h4>
+      <div class="horizontal-scroll">
+        <img src="spo1.png" class="avatar" />
+        <img src="spo2.png" class="avatar" />
+        <img src="spo3.png" class="avatar" />
+        <img src="spo4.png" class="avatar" />
+        <img src="spo5.jpg" class="avatar" />
+        <img src="spo6.jpg" class="avatar" />
+        <img src="spo7.jpg" class="avatar" />
+        <img src="spo8.jpg" class="avatar" />
+      </div>
+    </section>
+
+    <section class="batchmates-section">
+      <h4>Connect with your Batchmates</h4>
+      <div class="horizontal-scroll">
+        <div class="profile-card">
+          <img src="Anitha.jpg" />
+          <p>Anitha</p>
+        </div>
+        <div class="profile-card">
+          <img src="Arjun.jpg" />
+          <p>Arjun</p>
+        </div>
+        <div class="profile-card">
+          <img src="Bavni.png" />
+          <p>Priya</p>
+        </div>
+        <!-- New batchmates -->
+        <div class="profile-card">
+          <img src="Rajesh.jpg" />
+          <p>Rajesh</p>
+        </div>
+        <div class="profile-card">
+          <img src="Anu.jpg" />
+          <p>Anu</p>
+        </div>
+        <div class="profile-card">
+          <img src="Karan.jpg" />
+          <p>Karan</p>
+        </div>
+        <div class="profile-card">
+          <img src="Priya.jpg" />
+          <p>Nisha</p>
+        </div>
+        <div class="profile-card">
+          <img src="Vijay.jpg" />
+          <p>Vijay</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="events-section">
+      <h4>Upcoming Events</h4>
+      <img src="up1.png" class="event-img" />
+      <p>Annual Convocation Ceremony on 12 August</p>
+      <button onclick="navigateTo('event-register')">Register Now</button>
+    </section>
+
+    <div class="navbar">
+      <img src="home.png" />
+      <img src="search.png" onclick="navigateTo('search-page')" />
+      <img src="chat.png"  onclick="navigateTo('chat')"/>
+      <img src="bell.png" onclick="navigateTo('notification-screen')"/>
+      <img src="user.png" />
+    </div>
+</div>
+
+<!-- New screen for Event Registration Success -->
+<div id="event-registration-success" class="screen event-registration-success">
+    <h3>Event Registration Success</h3>
+    <p id="registration-message">Thank you for registering for the event!</p>
+    <button onclick="navigateTo('home')">Go Back to Home</button>
+</div>
+
+
+  <!-- Event Register Screen -->
+  <div id="event-register" class="screen">
+    <div class="center-event-register">
+      <h2>Register for Annual Convocation</h2>
+      <input type="text" id="event-name" placeholder="Your Name" />
+      <input type="text" id="event-batch" placeholder="Your Batch" />
+      <button onclick="submitEventRegistration()">Register</button>
+    </div>
+  </div>
+
+ <!-- Chat Section -->
+<div id="chat" class="screen chat-screen">
+  <h2>Alumni Chat Room</h2>
+  <div class="message-icon" onclick="toggleChat()">
+  <img src="message-icon.png" alt="Messages">
+  <span class="badge" id="msgBadge">2</span> <!-- Example: 2 unread messages -->
+
+<!-- Example Message -->
+<div class="chat-message user">
+  <img src="spo2.png" alt="You" class="avatar">
+  <div class="bubble">Hello! 😊</div>
+
+<div class="chat-message other">
+  <img src="spo1.png" alt="Alumni" class="avatar">
+  <div class="bubble">Hi! How can I help?</div>
+  <div id="chatMessages" class="chat-messages"></div>
+  <div class="chat-input">
+    <input type="text" id="messageInput" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+  <button onclick="navigateTo('home')">Back to Home</button>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Input Section -->
+<div class="chat-input">
+  <input type="text" id="messageInput" placeholder="Search for the alumni/student you need." />
+  <button onclick="sendMessage()">Search</button>
+  </div>
+
+  <section class="spotlight-section">
+  <h4>Alumni Spotlights</h4>
+  <div class="scroll-wrapper">
+    <button class="scroll-btn left" aria-label="Scroll Left">&#9664;</button>
+    
+    <div class="horizontal-scroll">
+      <img src="spo1.png" class="avatar" alt="Alumni 1" />
+      <img src="spo2.png" class="avatar" alt="Alumni 2" />
+      <img src="spo3.png" class="avatar" alt="Alumni 3" />
+      <img src="spo4.png" class="avatar" alt="Alumni 4" />
+      <img src="spo5.jpg" class="avatar" alt="Alumni 5" />
+      <img src="spo6.jpg" class="avatar" alt="Alumni 6" />
+      <img src="spo7.jpg" class="avatar" alt="Alumni 7" />
+      <img src="spo8.jpg" class="avatar" alt="Alumni 8" />
+    </div>
+    
+    <button class="scroll-btn right" aria-label="Scroll Right">&#9654;</button>
+  </div>
+</section>
+
+</div>
+
+<!-- Notification Screen -->
+<div class="screen" id="notification-screen" style="display: none;">
+  <div class="header">
+    <div class="logo"><bold>🔔 Notifications</bold></div>
+    <div class="close-icon" onclick="navigateTo('home')">❌</div>
+  </div>
+  <div class="content">
+    <h2 style="margin-bottom: 15px;">Upcoming Events</h2>
+    <div class="scroll-section">
+      <div class="event-card">
+        <p>Alumni Meet 2025</p>
+        <p>Date: July 10, 2025</p>
+        <p>Venue: College Auditorium</p>
+      </div>
+      <div class="event-card">
+        <p>Career Talk by Alumni</p>
+        <p>Date: June 22, 2025</p>
+        <p>Speaker: Dr. Aarthi Venkat</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Search Page Screen -->
+  <div id="search-page" class="screen">
+    <div class="centered">
+      <h2>Search Alumni</h2>
+      <input type="text" id="search-query" placeholder="Enter name or batch" />
+      <button onclick="performSearch()">Search</button>
+      <div id="search-results"></div>
+    </div>
+  </div>
+
+</div>
+
+  <script src="alumini.js"></script>
+</body>
+</html>
