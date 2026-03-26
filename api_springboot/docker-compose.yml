@@ -1,0 +1,29 @@
+services:
+  mlcart-backend:
+    build:
+      context: "."
+      dockerfile: "Dockerfile"
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mlcart-db
+    environment:
+      # This tells Spring Boot where to find the DB inside the Docker network
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mlcart-db:3306/${DB_NAME}?allowPublicKeyRetrieval=true&useSSL=false
+
+  mlcart-db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/mysql  # Persists your data
+
+volumes:
+  db_data:
